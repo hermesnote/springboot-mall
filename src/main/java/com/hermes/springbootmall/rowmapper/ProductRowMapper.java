@@ -1,5 +1,6 @@
 package com.hermes.springbootmall.rowmapper;
 
+import com.hermes.springbootmall.constant.ProductCategory;
 import com.hermes.springbootmall.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,7 +16,18 @@ public class ProductRowMapper implements RowMapper<Product> {
 
         product.setProductId(resultSet.getInt("product_id"));
         product.setProductName(resultSet.getString("product_name"));
-        product.setCategory(resultSet.getString("category"));
+
+        // 使用 String 轉 Enum
+        String categoryStr = resultSet.getString("category");
+        ProductCategory category = ProductCategory.valueOf(categoryStr);
+        product.setCategory(category);
+
+        // 上面一行解決
+//        product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
+
+        // 未 Enum 的原程式
+//        product.setCategory(resultSet.getString("category"));
+
         product.setImageUrl(resultSet.getString("image_url"));
         product.setPrice(resultSet.getInt("price"));
         product.setStock(resultSet.getInt("stock"));
