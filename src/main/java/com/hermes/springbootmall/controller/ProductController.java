@@ -1,5 +1,6 @@
 package com.hermes.springbootmall.controller;
 
+import com.hermes.springbootmall.constant.ProductCategory;
 import com.hermes.springbootmall.dto.ProductRequest;
 import com.hermes.springbootmall.model.Product;
 import com.hermes.springbootmall.service.ProductService;
@@ -19,9 +20,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ) {
 
-        List<Product> productList = productService.getProducts();
+        List<Product> productList = productService.getProducts(category, search);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
 
