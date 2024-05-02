@@ -1,12 +1,20 @@
 package com.hermes.springbootmall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class User {
 
     private Integer userId;
+
+    @JsonProperty("e_mail")  // 更改回傳原email欄位email的名稱
     private String email;
+
+    @JsonIgnore  // 回傳時忽略此json字串不顯示
     private String password;
+
     private Date createdDate;
     private Date lastModifiedDate;
 
