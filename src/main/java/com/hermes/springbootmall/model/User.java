@@ -9,7 +9,7 @@ public class User {
 
     private Integer userId;
 
-    @JsonProperty("e_mail")  // 更改回傳原email欄位email的名稱
+//    @JsonProperty("e_mail")  // 更改回傳原email欄位email的名稱, 此處會影響Test的jsonPath回傳值, 必須設定為同或刪此二擇一
     private String email;
 
     @JsonIgnore  // 回傳時忽略此json字串不顯示
