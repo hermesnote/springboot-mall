@@ -28,7 +28,7 @@ public class ProductDaoImpl implements ProductDao {
     public Integer countProduct(ProductQueryParams productQueryParams) {
         String sql = "SELECT count(*) FROM product WHERE 1=1";
 
-        Map<String, Object> map = new HashMap();
+        Map<String, Object> map = new HashMap<>();
 
         // 引用下方查詢方法
         sql = addFilteringSql(sql, map, productQueryParams);
@@ -44,7 +44,7 @@ public class ProductDaoImpl implements ProductDao {
         String sql = "SELECT product_id, product_name, category, image_url, price, stock, description, " +
                 "created_date, last_modified_date FROM product WHERE 1=1";
 
-        Map<String, Object> map = new HashMap();
+        Map<String, Object> map = new HashMap<>();
 
         // 引用下方查詢方法
         sql = addFilteringSql(sql, map, productQueryParams);
