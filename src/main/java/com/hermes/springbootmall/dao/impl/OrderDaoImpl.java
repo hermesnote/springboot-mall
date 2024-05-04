@@ -83,7 +83,7 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "SELECT oi.order_item_id, oi.order_id, oi.product_id, oi.quantity, oi.amount, p.product_name, p.image_url " +
                 "FROM order_item as oi " +
                 "LEFT JOIN product as p ON oi.product_id = p.product_id " +
-                "WHERE oi.product_id = :orderId";
+                "WHERE oi.order_id = :orderId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("orderId", orderId);
