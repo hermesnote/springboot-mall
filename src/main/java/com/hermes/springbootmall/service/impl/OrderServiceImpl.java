@@ -6,6 +6,7 @@ import com.hermes.springbootmall.dao.ProductDao;
 import com.hermes.springbootmall.dao.UserDao;
 import com.hermes.springbootmall.dto.BuyItem;
 import com.hermes.springbootmall.dto.CreateOrderRequest;
+import com.hermes.springbootmall.dto.OrderQueryParams;
 import com.hermes.springbootmall.model.Order;
 import com.hermes.springbootmall.model.OrderItem;
 import com.hermes.springbootmall.model.Product;
@@ -36,6 +37,22 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserDao userDao;
 
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for(Order order : orderList) {
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+            order.setOrderItemList(orderItemList);
+        }
+
+        return orderList;
+    }
 
     @Override
     public Order getOrderById(Integer orderId) {
