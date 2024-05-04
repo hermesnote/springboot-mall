@@ -4,6 +4,7 @@ import com.hermes.springbootmall.dao.OrderDao;
 import com.hermes.springbootmall.dao.ProductDao;
 import com.hermes.springbootmall.dto.BuyItem;
 import com.hermes.springbootmall.dto.CreateOrderRequest;
+import com.hermes.springbootmall.model.Order;
 import com.hermes.springbootmall.model.OrderItem;
 import com.hermes.springbootmall.model.Product;
 import com.hermes.springbootmall.service.OrderService;
@@ -23,6 +24,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductDao productDao;
+
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        Order order = orderDao.getOrderById(orderId);
+
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        order.setOrderItemList(orderItemList);
+
+        return order;
+    }
 
     @Transactional // 確保兩個資料庫操作同時發生
     @Override
